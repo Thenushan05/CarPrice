@@ -1,0 +1,68 @@
+Feature,Importance,Std
+num__Millage(KM),0.3049039116723161,0.006918048485280036
+num__Car_Age,0.1055247623153332,0.0033938245225133582
+num__Comfort_Score,0.053376447912331426,0.0011989358303587838
+num__Engine (cc),0.0440702096856406,0.001532992885421215
+cat__Brand_SKODA,0.0,0.0
+cat__Brand_VOLKSWAGEN,0.0,0.0
+cat__Brand_TOYOTA,0.0,0.0
+cat__Brand_TATA,0.0,0.0
+cat__Brand_SUZUKI,0.0,0.0
+cat__Brand_SUBARU,0.0,0.0
+cat__Brand_RENAULT,0.0,0.0
+cat__Brand_SEAT,0.0,0.0
+cat__Brand_WILLYS,0.0,0.0
+cat__Brand_PROTON,0.0,0.0
+cat__Brand_PEUGEOT,0.0,0.0
+cat__Brand_PERODUA,0.0,0.0
+cat__Brand_OPEL,0.0,0.0
+cat__Brand_VOLVO,0.0,0.0
+cat__Gear_Automatic,0.0,0.0
+cat__Brand_ZOTYE,0.0,0.0
+cat__Brand_MORRIS,0.0,0.0
+cat__Gear_Manual,0.0,0.0
+cat__Fuel Type_Diesel,0.0,0.0
+cat__Fuel Type_Electric,0.0,0.0
+cat__Fuel Type_Hybrid,0.0,0.0
+cat__Fuel Type_Petrol,0.0,0.0
+cat__Leasing_0,0.0,0.0
+cat__Leasing_Ongoing Lease,0.0,0.0
+cat__Condition_NEW,0.0,0.0
+cat__Condition_USED,0.0,0.0
+cat__Engine_Category_Large,0.0,0.0
+cat__Engine_Category_Luxury,0.0,0.0
+cat__Engine_Category_Medium,0.0,0.0
+cat__Engine_Category_Small,0.0,0.0
+cat__Brand_NISSAN,0.0,0.0
+cat__Brand_MINI,0.0,0.0
+cat__Brand_MITSUBISHI,0.0,0.0
+cat__Brand_MICRO,0.0,0.0
+num__AIR CONDITION,0.0,0.0
+num__POWER STEERING,0.0,0.0
+num__POWER MIRROR,0.0,0.0
+num__POWER WINDOW,0.0,0.0
+cat__Brand_AUDI,0.0,0.0
+cat__Brand_AUSTIN,0.0,0.0
+cat__Brand_BAJAJ,0.0,0.0
+cat__Brand_BMW,0.0,0.0
+cat__Brand_CHERY,0.0,0.0
+cat__Brand_CHEVROLET,0.0,0.0
+cat__Brand_DAEWOO,0.0,0.0
+cat__Brand_DAIHATSU,0.0,0.0
+cat__Brand_DATSUN,0.0,0.0
+cat__Brand_FIAT,0.0,0.0
+cat__Brand_FORD,0.0,0.0
+cat__Brand_FOTON,0.0,0.0
+cat__Brand_HONDA,0.0,0.0
+cat__Brand_HYUNDAI,0.0,0.0
+cat__Brand_ISUZU,0.0,0.0
+cat__Brand_JAGUAR,0.0,0.0
+cat__Brand_JONWAY,0.0,0.0
+cat__Brand_KIA,0.0,0.0
+cat__Brand_LEXUS,0.0,0.0
+cat__Brand_MAHINDRA,0.0,0.0
+cat__Brand_MAZDA,0.0,0.0
+cat__Brand_MERCEDES-BENZ,0.0,0.0
+cat__Brand_MG,0.0,0.0
+cat__Engine_Category_XLarge,0.0,0.0
+num__Mileage_Per_Year,-0.016373060714019935,0.0010484191604154727
