@@ -1,0 +1,39 @@
+{
+  "model_type": "RandomForestRegressor",
+  "feature_names": [
+    "Engine (cc)",
+    "Millage(KM)",
+    "AIR CONDITION",
+    "POWER STEERING",
+    "POWER MIRROR",
+    "POWER WINDOW",
+    "Car_Age",
+    "Mileage_Per_Year",
+    "Comfort_Score",
+    "Brand",
+    "Gear",
+    "Fuel Type",
+    "Leasing",
+    "Condition",
+    "Engine_Category"
+  ],
+  "use_log_transform": "True",
+  "best_params": {
+    "max_depth": 15,
+    "max_features": 0.5,
+    "min_samples_leaf": 1,
+    "min_samples_split": 6,
+    "n_estimators": 330
+  },
+  "metrics": {
+    "train_rmse": 8.530342435654077,
+    "train_mae": 4.75982923821532,
+    "train_r2": 0.9331597706041239,
+    "test_rmse": 11.777840788290973,
+    "test_mae": 6.398885954109644,
+    "test_mape": 0.15740021898836912,
+    "test_r2": 0.871541863144967
+  },
+  "created_at": "2026-03-30T20:15:16.324716",
+  "random_state": 42
+}
