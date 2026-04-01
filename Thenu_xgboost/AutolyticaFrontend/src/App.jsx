@@ -11,13 +11,22 @@ const fadeIn = {
   visible: { opacity: 1, y: 0 }
 };
 
+const MercedesLogo = ({ size = 36 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
+    <path d="M12 2 L12 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    <path d="M12 12 L3.34 17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    <path d="M12 12 L20.66 17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+  </svg>
+);
+
 const TOP_BRANDS = [
   { name: "TOYOTA", icon: <SiToyota size={36} /> }, 
   { name: "HONDA", icon: <SiHonda size={36} /> }, 
   { name: "NISSAN", icon: <SiNissan size={36} /> }, 
   { name: "BMW", icon: <SiBmw size={36} /> }, 
   { name: "AUDI", icon: <SiAudi size={36} /> }, 
-  { name: "MERCEDES-BENZ", icon: <Car size={36} /> }, 
+  { name: "MERCEDES-BENZ", icon: <MercedesLogo size={36} /> }, 
   { name: "KIA", icon: <SiKia size={36} /> }, 
   { name: "SUZUKI", icon: <SiSuzuki size={36} /> }
 ];
@@ -160,56 +169,79 @@ export default function App() {
 
       <main style={{ paddingTop: 120, paddingBottom: 100, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         
-        {/* Dynamic 3D Hero */}
-        <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 80, padding: '0 24px', flexWrap: 'wrap', gap: 40}}>
+        {/* Holographic 3D Hero Section */}
+        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginBottom: 20, padding: '0 24px', gap: 60}}>
           <motion.div 
             initial="hidden" animate="visible" variants={fadeIn} transition={{duration: 0.6}}
-            style={{ textAlign: 'left', maxWidth: 600 }}>
+            style={{ textAlign: 'center', maxWidth: 800 }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'linear-gradient(90deg, rgba(14, 165, 233, 0.1), rgba(59, 130, 246, 0.1))', border: '1px solid rgba(14, 165, 233, 0.2)', padding: '8px 20px', borderRadius: 30, color: '#0ea5e9', fontSize: '0.9rem', fontWeight: 600, marginBottom: 24}}>
               <Sparkles size={16} /> Empowered by XGBoost Intelligence
             </div>
-            <h2 style={{ fontSize: '4.5rem', fontWeight: 800, lineHeight: 1.1, marginBottom: 24, letterSpacing: '-1.5px', textShadow: '0 10px 30px rgba(0,0,0,0.5)'}}>
+            <h2 style={{ fontSize: '5rem', fontWeight: 800, lineHeight: 1.1, marginBottom: 24, letterSpacing: '-1.5px', textShadow: '0 10px 30px rgba(0,0,0,0.5)'}}>
               Precision Automotive Value.<br/>
               <span style={{background: 'linear-gradient(to right, #94a3b8, #475569)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>Redefined.</span>
             </h2>
-            <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: 500 }}>
+            <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: 600, margin: '0 auto' }}>
               Select your favorite brand using our interactive 3D UI, define the exact specs, and let our ML model extract extreme market precision instantly.
             </p>
           </motion.div>
 
-          {/* Custom 3D Tilt Hologram Card (Solves 403 Iframe Issue) */}
-          <motion.div 
-             onMouseMove={handleMouse}
-             onMouseLeave={handleMouseLeave}
-             initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}
-             style={{ 
-               width: 500, height: 400, borderRadius: 24, 
-               background: 'linear-gradient(135deg, rgba(255,255,255,0.03), rgba(0,0,0,0.5))', 
-               boxShadow: '0 30px 60px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.05)',
-               perspective: 1200, display: 'flex', alignItems: 'center', justifyContent: 'center'
-             }}>
+          {/* Epic Holographic Stand & Real BMW M4 3D Car */}
+          <div style={{ position: 'relative', width: '100%', maxWidth: 1000, height: 500, display: 'flex', justifyContent: 'center' }}>
              
-             <motion.div
-               style={{
-                 width: '100%', height: '100%',
-                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                 rotateX: rotateX, rotateY: rotateY,
-                 transformStyle: "preserve-3d"
-               }}
-             >
-                <motion.div style={{ translateZ: 20, position: 'absolute', opacity: 0.3 }}>
-                  <div style={{ width: 300, height: 300, border: '1px dashed #3b82f6', borderRadius: '50%', animation: 'spin 15s linear infinite' }} />
-                </motion.div>
-                
-                <motion.div style={{ translateZ: 60, position: 'absolute' }}>
-                  <Car size={200} color="#0ea5e9" strokeWidth={1} style={{ filter: 'drop-shadow(0 0 40px rgba(14,165,233,0.6))' }} />
-                </motion.div>
-                
-                <motion.div style={{ translateZ: 90, position: 'absolute', bottom: 40, background: 'rgba(14, 165, 233, 0.15)', padding: '6px 20px', borderRadius: 20, border: '1px solid rgba(14,165,233,0.3)', color: '#0ea5e9', fontWeight: 600, letterSpacing: 2, fontSize: '0.85rem' }}>
-                   XGBOOST ENGINE
-                </motion.div>
+             {/* Holographic Glowing Base Pad */}
+             <div style={{
+               position: 'absolute', bottom: -20, width: '70%', height: 120,
+               background: 'radial-gradient(ellipse at center, rgba(14,165,233,0.35) 0%, transparent 60%)',
+               borderRadius: '50%', filter: 'blur(15px)', zIndex: 0
+             }} />
+             
+             {/* Holographic Upward Light Beams */}
+             <div style={{
+               position: 'absolute', bottom: 10, width: '50%', height: '80%',
+               background: 'linear-gradient(to top, rgba(14,165,233,0.2) 0%, transparent 100%)',
+               clipPath: 'polygon(20% 100%, 80% 100%, 100% 0, 0 0)',
+               zIndex: 0, opacity: 0.5, animation: 'pulse 4s ease-in-out infinite alternate'
+             }} />
+
+             <motion.div 
+               initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}
+               style={{ 
+                 position: 'relative', zIndex: 10, width: '100%', maxWidth: 800, height: 400,
+                 display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none'
+               }}>
+               {/* 
+                  Hard lock pointerEvents to 'none' block Sketchfab's hover triggers. 
+                  Inner box scales up, while clipPath mathematically cuts off all Sketchfab UI. 
+                  mixBlendMode DIRECTLY on the iframe guarantees the black webGL canvas becomes fully transparent! 
+               */}
+               <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                 <div style={{ width: 1600, height: 800, transform: 'scale(0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', willChange: 'transform' }}>
+                   {/* Optimized 1600x800 resolution massively cuts WebGL overhead to eliminate scroll lag. 
+                       translateZ forces a dedicated GPU acceleration layer for smooth compositor scrolling. */}
+                   <div style={{ 
+                     width: 1600, height: 800, overflow: 'hidden', position: 'relative', 
+                     WebkitMaskImage: 'radial-gradient(ellipse at center, black 85%, transparent 100%)',
+                     maskImage: 'radial-gradient(ellipse at center, black 85%, transparent 100%)',
+                     transform: 'translateZ(0)', willChange: 'transform'
+                   }}>
+                     <iframe 
+                       title="Holographic BMW Supercar Render" 
+                       frameBorder="0" allowFullScreen mozallowfullscreen="true" webkitallowfullscreen="true" 
+                       allow="autoplay; fullscreen; xr-spatial-tracking"
+                       execution-while-out-of-viewport="true" execution-while-not-rendered="true" web-share="true"
+                       src="https://sketchfab.com/models/d3f07b471d9f4a2c9a2acf79d88a3645/embed?autostart=1&transparent=1&ui_theme=dark&dnt=1&ui_infos=0&ui_watermark=0&ui_controls=0&ui_stop=0&ui_hint=0&autospin=0.15"
+                       style={{ 
+                         position: 'absolute', top: -70, left: 0,
+                         width: 1600, height: 940, border: 'none', outline: 'none',
+                         pointerEvents: 'none', mixBlendMode: 'screen', filter: 'contrast(1.3) brightness(1.1) saturate(1.2)'
+                       }}
+                     />
+                   </div>
+                 </div>
+               </div>
              </motion.div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Form Container */}
