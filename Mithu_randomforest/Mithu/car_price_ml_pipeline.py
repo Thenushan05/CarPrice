@@ -702,6 +702,19 @@ def evaluate_model(pipeline: Pipeline, X_train: pd.DataFrame, y_train: pd.Series
     plt.savefig(os.path.join(OUTPUT_DIR, 'model_evaluation.png'), dpi=150, bbox_inches='tight')
     plt.close()
     print_status("Saved: model_evaluation.png")
+
+    # Residuals vs predicted helps reveal bias and heteroscedasticity patterns.
+    plt.figure(figsize=(10, 6))
+    plt.scatter(y_test_pred_actual, residuals, alpha=0.5, edgecolor='k', linewidth=0.5)
+    plt.axhline(0, color='red', linestyle='--', linewidth=2)
+    plt.xlabel('Predicted Price')
+    plt.ylabel('Residual (Actual - Predicted)')
+    plt.title('Residuals vs Predicted Prices')
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.savefig(os.path.join(OUTPUT_DIR, 'residuals_vs_predicted.png'), dpi=150, bbox_inches='tight')
+    plt.close()
+    print_status("Saved: residuals_vs_predicted.png")
     
     return metrics
 
@@ -1028,7 +1041,7 @@ def main():
     print("█" * 70)
     
     # File path
-    csv_path = os.path.join(OUTPUT_DIR, 'car_price_dataset_cleaned.csv')
+    csv_path = os.path.join(OUTPUT_DIR, 'dataset', 'car_price_dataset_cleaned.csv')
     
     if not os.path.exists(csv_path):
         print(f"\n❌ ERROR: CSV file not found at: {csv_path}")
