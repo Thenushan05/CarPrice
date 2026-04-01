@@ -1,0 +1,8 @@
+/* Vite default CSS wipe */
+#root {
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0 auto;
+  text-align: left;
+  overflow-x: hidden;
+}

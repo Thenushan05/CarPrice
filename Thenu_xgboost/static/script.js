@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.getElementById('submit-btn');
     const resultContainer = document.getElementById('result-container');
     const predictedPriceText = document.getElementById('predicted-price');
+    const fullPriceText = document.getElementById('full-price');
     const resultLabel = document.querySelector('.result-label');
 
     let modelsData = {};
@@ -51,6 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
         spinner.style.display = 'block';
         submitBtn.disabled = true;
         resultContainer.classList.add('hidden');
+        resultContainer.classList.remove('error-glass');
+        fullPriceText.textContent = '';
 
         const formData = new FormData(form);
         const inputDict = {};
@@ -78,37 +81,51 @@ document.addEventListener('DOMContentLoaded', () => {
             resultContainer.classList.remove('hidden');
             resultContainer.style.height = 'auto'; // allow expansion
             resultContainer.style.padding = '30px'; 
-            resultContainer.style.border = '1px solid var(--primary-color)';
             
             if (data.status === 'success') {
                 resultLabel.textContent = 'Estimated Market Value';
                 predictedPriceText.className = 'result-value';
                 
-                // Format price in local currency
+                // Format price in Lakhs
+                const priceValue = data.predicted_price;
+                const lakhsValue = (priceValue / 100000).toFixed(2);
+                
+                predictedPriceText.textContent = `${lakhsValue} Lakhs`;
+
+                // Format full price as a secondary subtitle
                 const formatter = new Intl.NumberFormat('en-LK', {
                     style: 'currency',
                     currency: 'LKR',
                     maximumFractionDigits: 0
                 });
+                fullPriceText.textContent = formatter.format(priceValue);
                 
-                predictedPriceText.textContent = formatter.format(data.predicted_price);
             } else {
+                resultContainer.classList.add('error-glass');
                 resultLabel.textContent = 'Error';
                 predictedPriceText.className = 'result-value error';
                 predictedPriceText.textContent = data.errors ? data.errors.join(', ') : 'Failed to predict';
+                fullPriceText.textContent = '';
             }
         })
         .catch(err => {
             console.error('Prediction Error:', err);
             resultContainer.classList.remove('hidden');
+            resultContainer.classList.add('error-glass');
             resultLabel.textContent = 'Error';
             predictedPriceText.className = 'result-value error';
             predictedPriceText.textContent = 'Failed to communicate with server.';
+            fullPriceText.textContent = '';
         })
         .finally(() => {
             btnText.style.display = 'inline-block';
             spinner.style.display = 'none';
             submitBtn.disabled = false;
+            
+            // Auto scroll down slightly to show result
+            setTimeout(() => {
+                resultContainer.scrollIntoView({behavior: 'smooth', block: 'end'});
+            }, 100);
         });
     });
 });

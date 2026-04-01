@@ -3,131 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Car Price Predictor</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Autolytica | Professional Car Valuation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="background-overlay"></div>
-    <div class="container">
-        <header>
-            <h1>Autolytica</h1>
-            <p>Advanced AI-driven valuation for modern vehicles</p>
-        </header>
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-car-side"></i> Autolytica
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#predictor" class="btn-primary-small">Get Valuation</a></li>
+            </ul>
+        </div>
+    </nav>
 
-        <main class="glass-panel">
-            <form id="prediction-form">
-                <div class="form-grid">
-                    <div class="input-group">
-                        <label for="brand">Make</label>
-                        <select id="brand" name="Brand" required>
-                            <option value="" disabled selected>Select Make</option>
-                        </select>
-                    </div>
+    <!-- Hero Section (Landing Page) -->
+    <section id="home" class="hero">
+        <div class="hero-bg-overlay"></div>
+        <div class="hero-content">
+            <h1>Discover the True Value of Your Vehicle</h1>
+            <p>Leverage cutting-edge XGBoost AI to get precise, data-driven market valuations for your car in seconds. Never guess your car's price again.</p>
+            <div class="hero-buttons">
+                <a href="#predictor" class="btn-primary">Start Prediction</a>
+                <a href="#features" class="btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
 
-                    <div class="input-group">
-                        <label for="model">Model</label>
-                        <select id="model" name="Model" required disabled>
-                            <option value="" disabled selected>Select Model</option>
-                        </select>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="gear">Transmission</label>
-                        <select id="gear" name="Gear" required>
-                            <option value="Automatic">Automatic</option>
-                            <option value="Manual">Manual</option>
-                        </select>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="fuel_type">Fuel Type</label>
-                        <select id="fuel_type" name="Fuel Type" required>
-                            <option value="Petrol">Petrol</option>
-                            <option value="Diesel">Diesel</option>
-                            <option value="Hybrid">Hybrid</option>
-                            <option value="Electric">Electric</option>
-                        </select>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="engine_cc">Engine Capacity (cc)</label>
-                        <input type="number" id="engine_cc" name="Engine (cc)" min="500" max="10000" value="1000" required>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="millage">Mileage (KM)</label>
-                        <input type="number" id="millage" name="Millage(KM)" min="0" max="1000000" value="50000" required>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="car_age">Age (Years)</label>
-                        <input type="number" id="car_age" name="Car_Age" min="0" max="50" value="5" required>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="condition">Condition</label>
-                        <select id="condition" name="Condition" required>
-                            <option value="NEW">New</option>
-                            <option value="USED" selected>Used</option>
-                        </select>
-                    </div>
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="section-container">
+            <div class="section-title">
+                <h2>Why Choose Autolytica?</h2>
+                <p>Built with enterprise-grade machine learning models.</p>
+            </div>
+            <div class="features-grid-cards">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-brain"></i></div>
+                    <h3>AI-Powered Accuracy</h3>
+                    <p>Our XGBoost model analyzes thousands of historical data points to ensure peak valuation accuracy.</p>
                 </div>
-
-                <div class="divider">Features</div>
-
-                <div class="features-grid">
-                    <label class="feature-checkbox">
-                        <input type="checkbox" id="air_condition" name="AIR CONDITION" checked>
-                        <span class="checkmark"></span>
-                        Air Condition
-                    </label>
-
-                    <label class="feature-checkbox">
-                        <input type="checkbox" id="power_steering" name="POWER STEERING" checked>
-                        <span class="checkmark"></span>
-                        Power Steering
-                    </label>
-
-                    <label class="feature-checkbox">
-                        <input type="checkbox" id="power_mirror" name="POWER MIRROR" checked>
-                        <span class="checkmark"></span>
-                        Power Mirror
-                    </label>
-
-                    <label class="feature-checkbox">
-                        <input type="checkbox" id="power_window" name="POWER WINDOW" checked>
-                        <span class="checkmark"></span>
-                        Power Window
-                    </label>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h3>Instant Results</h3>
+                    <p>No waiting for manual appraisals. Get a highly accurate predicted market value instantly.</p>
                 </div>
-
-                <div class="form-grid" style="margin-top: 20px;">
-                    <div class="input-group" style="grid-column: span 2;">
-                        <label for="leasing">Leasing</label>
-                        <select id="leasing" name="Leasing" required>
-                            <option value="0">No Active Lease</option>
-                            <option value="Ongoing Lease">Ongoing Lease</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="action-section">
-                    <button type="submit" id="submit-btn" class="glow-button">
-                        <span class="btn-text">Predict Valuation</span>
-                        <div class="spinner" id="loading-spinner"></div>
-                    </button>
-                </div>
-            </form>
-
-            <div id="result-container" class="result-glass hidden">
-                <div class="result-content">
-                    <p class="result-label">Estimated Market Value</p>
-                    <h2 id="predicted-price" class="result-value">LKR 0</h2>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3>Market-Driven</h3>
+                    <p>Reflects real-time market trends, taking into account brand inflation, condition, and leasing states.</p>
                 </div>
             </div>
-        </main>
-    </div>
+        </div>
+    </section>
+
+    <!-- Predictor App Section -->
+    <section id="predictor" class="app-section">
+        <div class="section-container app-container">
+            <div class="app-header">
+                <h2>Valuation Calculator</h2>
+                <p>Enter your vehicle's specifications below</p>
+            </div>
+            
+            <main class="glass-panel">
+                <form id="prediction-form">
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="brand">Make</label>
+                            <select id="brand" name="Brand" required>
+                                <option value="" disabled selected>Select Make</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="model">Model</label>
+                            <select id="model" name="Model" required disabled>
+                                <option value="" disabled selected>Select Model</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="gear">Transmission</label>
+                            <select id="gear" name="Gear" required>
+                                <option value="Automatic">Automatic</option>
+                                <option value="Manual">Manual</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="fuel_type">Fuel Type</label>
+                            <select id="fuel_type" name="Fuel Type" required>
+                                <option value="Petrol">Petrol</option>
+                                <option value="Diesel">Diesel</option>
+                                <option value="Hybrid">Hybrid</option>
+                                <option value="Electric">Electric</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="engine_cc">Engine Capacity (cc)</label>
+                            <input type="number" id="engine_cc" name="Engine (cc)" min="500" max="10000" value="1000" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="millage">Mileage (KM)</label>
+                            <input type="number" id="millage" name="Millage(KM)" min="0" max="1000000" value="50000" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="car_age">Age (Years)</label>
+                            <input type="number" id="car_age" name="Car_Age" min="0" max="50" value="5" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="condition">Condition</label>
+                            <select id="condition" name="Condition" required>
+                                <option value="NEW">New</option>
+                                <option value="USED" selected>Used</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="divider">Additional Features</div>
+
+                    <div class="options-grid">
+                        <label class="feature-checkbox">
+                            <input type="checkbox" id="air_condition" name="AIR CONDITION" checked>
+                            <span class="checkmark"></span>
+                            Air Condition
+                        </label>
+
+                        <label class="feature-checkbox">
+                            <input type="checkbox" id="power_steering" name="POWER STEERING" checked>
+                            <span class="checkmark"></span>
+                            Power Steering
+                        </label>
+
+                        <label class="feature-checkbox">
+                            <input type="checkbox" id="power_mirror" name="POWER MIRROR" checked>
+                            <span class="checkmark"></span>
+                            Power Mirror
+                        </label>
+
+                        <label class="feature-checkbox">
+                            <input type="checkbox" id="power_window" name="POWER WINDOW" checked>
+                            <span class="checkmark"></span>
+                            Power Window
+                        </label>
+                    </div>
+
+                    <div class="form-grid" style="margin-top: 24px;">
+                        <div class="input-group" style="grid-column: span 2;">
+                            <label for="leasing">Leasing Status</label>
+                            <select id="leasing" name="Leasing" required>
+                                <option value="0">No Active Lease</option>
+                                <option value="Ongoing Lease">Ongoing Lease</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="action-section">
+                        <button type="submit" id="submit-btn" class="glow-button">
+                            <span class="btn-text">Generate Valuation</span>
+                            <div class="spinner" id="loading-spinner"></div>
+                        </button>
+                    </div>
+                </form>
+
+                <div id="result-container" class="result-glass hidden">
+                    <div class="result-content">
+                        <p class="result-label">Estimated Market Value</p>
+                        <h2 id="predicted-price" class="result-value">0 Lakhs</h2>
+                        <p id="full-price" style="color: var(--text-secondary); margin-top: 5px; font-size: 0.9rem;"></p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fa-solid fa-car-side"></i> Autolytica
+            </div>
+            <p>&copy; 2026 Autolytica AI. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script src="/static/script.js"></script>
 </body>
 </html>
