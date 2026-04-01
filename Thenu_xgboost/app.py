@@ -1,64 +1,54 @@
-import streamlit as st
+import os
 import pandas as pd
-import requests
-import json
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
+from predict import predict
 
-# Dropdown options (from CSV and model)
-BRANDS = [
+app = FastAPI(title="Car Price Prediction API")
+
+# Setup static directory
+current_dir = os.path.dirname(os.path.abspath(__file__))
+static_dir = os.path.join(current_dir, "static")
+
+# Expose static files
+app.mount("/static", StaticFiles(directory=static_dir), name="static")
+
+BRANDS = sorted([
     "AUDI", "AUSTIN", "BAJAJ", "BMW", "CHERY", "CHEVROLET", "DAEWOO", "DAIHATSU", "DATSUN", "FIAT", "FORD", "FOTON", "HONDA", "HYUNDAI", "ISUZU", "JAGUAR", "JONWAY", "KIA", "LEXUS", "MAHINDRA", "MAZDA", "MERCEDES-BENZ", "MG", "MICRO", "MINI", "MITSUBISHI", "MORRIS", "NISSAN", "OPEL", "PERODUA", "PEUGEOT", "PROTON", "RENAULT", "SEAT", "SKODA", "SUBARU", "SUZUKI", "TATA", "TOYOTA", "VOLKSWAGEN", "VOLVO", "WILLYS", "ZOTYE"
-]
+])
 
-GEARS = ["Automatic", "Manual"]
-FUEL_TYPES = ["Diesel", "Electric", "Hybrid", "Petrol"]
+# Read dataset once during startup to populate models
+try:
+    df = pd.read_csv(os.path.join(current_dir, "car_price_dataset_final.csv"))
+    # Precompute models dictionary
+    models_by_brand = {}
+    for brand in BRANDS:
+        models = df[df["Brand"] == brand]["Model"].unique()
+        models_by_brand[brand] = sorted([str(m) for m in models])
+except Exception as e:
+    print(f"Warning: Could not load car dataset for metadata: {e}")
+    models_by_brand = {brand: [] for brand in BRANDS}
 
-# Read models for each brand from CSV
-def get_models_for_brand(brand):
-    df = pd.read_csv("car_price_dataset_final.csv")
-    return sorted(df[df["Brand"] == brand]["Model"].unique())
+@app.get("/", response_class=HTMLResponse)
+async def read_index():
+    with open(os.path.join(static_dir, "index.html"), "r", encoding="utf-8") as f:
+        return f.read()
 
-def main():
-    st.title("Car Price Prediction")
-    st.write("Enter car details to predict the price.")
+@app.get("/api/metadata")
+async def get_metadata():
+    return JSONResponse({
+        "brands": BRANDS,
+        "models_by_brand": models_by_brand
+    })
 
-
-    brand = st.selectbox("Brand", BRANDS)
-    models = get_models_for_brand(brand)
-    model = st.selectbox("Model", models)
-    gear = st.selectbox("Gear", GEARS)
-    fuel_type = st.selectbox("Fuel Type", FUEL_TYPES)
-    engine_cc = st.number_input("Engine (cc)", min_value=500, max_value=10000, value=1000)
-    millage = st.number_input("Millage (KM)", min_value=0, max_value=1000000, value=50000)
-    car_age = st.number_input("Car Age (years)", min_value=0, max_value=50, value=5)
-    air_condition = st.selectbox("Air Condition", [0, 1])
-    power_steering = st.selectbox("Power Steering", [0, 1])
-    power_mirror = st.selectbox("Power Mirror", [0, 1])
-    power_window = st.selectbox("Power Window", [0, 1])
-    condition = st.selectbox("Condition", ["NEW", "USED"])
-    leasing = st.selectbox("Leasing", ["0", "Ongoing Lease"])
-
-    if st.button("Predict Price"):
-        input_dict = {
-            "Brand": brand,
-            "Model": model,
-            "Engine (cc)": engine_cc,
-            "Gear": gear,
-            "Fuel Type": fuel_type,
-            "Millage(KM)": millage,
-            "Car_Age": car_age,
-            "AIR CONDITION": air_condition,
-            "POWER STEERING": power_steering,
-            "POWER MIRROR": power_mirror,
-            "POWER WINDOW": power_window,
-            "Condition": condition,
-            "Leasing": leasing
-        }
-        # Local prediction (import predict.py)
-        from predict import predict
-        result = predict(input_dict)
-        if result["status"] == "success":
-            st.success(f"Predicted Price: {result['predicted_price']}")
-        else:
-            st.error(f"Error: {result['errors']}")
+@app.post("/api/predict")
+async def make_prediction(request: Request):
+    input_dict = await request.json()
+    result = predict(input_dict)
+    return JSONResponse(result)
 
 if __name__ == "__main__":
-    main()
+    import uvicorn
+    # Allows running exactly the same way (python app.py)
+    uvicorn.run("app:app", host="127.0.0.1", port=8000, reload=True)
