@@ -216,13 +216,11 @@ export default function App() {
                   mixBlendMode DIRECTLY on the iframe guarantees the black webGL canvas becomes fully transparent! 
                */}
                <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                 <div style={{ width: 1600, height: 800, transform: 'scale(0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', willChange: 'transform' }}>
-                   {/* Optimized 1600x800 resolution massively cuts WebGL overhead to eliminate scroll lag. 
-                       translateZ forces a dedicated GPU acceleration layer for smooth compositor scrolling. */}
+                 <div style={{ width: 2800, height: 1000, transform: 'scale(0.4)', display: 'flex', justifyContent: 'center', alignItems: 'center', willChange: 'transform' }}>
+                   {/* Expanding bounding width to 2800 guarantees infinite horizontal rotation space! 
+                       Increasing height to 1000 and scaling to 0.4 shrinks the model size (zooms out). */}
                    <div style={{ 
-                     width: 1600, height: 800, overflow: 'hidden', position: 'relative', 
-                     WebkitMaskImage: 'radial-gradient(ellipse at center, black 85%, transparent 100%)',
-                     maskImage: 'radial-gradient(ellipse at center, black 85%, transparent 100%)',
+                     width: 2800, height: 1000, overflow: 'hidden', position: 'relative', 
                      transform: 'translateZ(0)', willChange: 'transform'
                    }}>
                      <iframe 
@@ -233,7 +231,7 @@ export default function App() {
                        src="https://sketchfab.com/models/d3f07b471d9f4a2c9a2acf79d88a3645/embed?autostart=1&transparent=1&ui_theme=dark&dnt=1&ui_infos=0&ui_watermark=0&ui_controls=0&ui_stop=0&ui_hint=0&autospin=0.15"
                        style={{ 
                          position: 'absolute', top: -70, left: 0,
-                         width: 1600, height: 940, border: 'none', outline: 'none',
+                         width: 2800, height: 1140, border: 'none', outline: 'none',
                          pointerEvents: 'none', mixBlendMode: 'screen', filter: 'contrast(1.3) brightness(1.1) saturate(1.2)'
                        }}
                      />
